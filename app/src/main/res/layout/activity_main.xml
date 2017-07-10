@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cn.itsite.demo.MainActivity">
+
+    <Button
+        android:id="@+id/bt_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activity" />
+
+    <Button
+        android:id="@+id/bt_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fragment" />
+
+    <Button
+        android:id="@+id/bt_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RecyclerView" />
+
+    <Button
+        android:id="@+id/bt_webview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="WebView"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/bt_any_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Any View"
+        android:textSize="12sp" />
+
+</LinearLayout>

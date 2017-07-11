@@ -10,7 +10,6 @@ import android.widget.Toast;
 import cn.itsite.statemanager.StateListener;
 import cn.itsite.statemanager.StateManager;
 
-
 /**
  * Author：leguang on 2016/10/12 0009 15:49
  * Email：langmanleguang@qq.com

@@ -32,6 +32,7 @@ StateManager是一个页面状态管理工具，可以让开发者方便而又�
 3. 代码中简单使用：
 
 ```
+//首先配置一下：
 StateManager mStateManager = StateManager.builder(this)
                 .setContent(this)//为哪部分内容添加状态管理。这里可以是Activity，Fragment或任何View。
                 .setErrorOnClickListener(new StateListener.OnClickListener() {
@@ -47,6 +48,18 @@ StateManager mStateManager = StateManager.builder(this)
                     }
                 })
                 .build();//构建
+ 
+//在需要用到的地方切换状态。
+
+mStateManager.showLoading();//切换到Loading状态
+
+mStateManager.showEmpty();//切换到空数据状态
+
+mStateManager.showError();//切换到异常状态
+
+mStateManager.showNetError();//切换到网络异常状态
+
+mStateManager.showContent();//切换到默认状态
 
 ```
 

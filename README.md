@@ -27,7 +27,7 @@ StateManager是一个页面状态管理工具，可以让开发者方便而又�
 	        compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.7'
 	}
 ```
-
+   
 
 # License
 

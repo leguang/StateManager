@@ -85,23 +85,24 @@ public class AnyView extends AppCompatActivity implements View.OnClickListener {
         btContent.setOnClickListener(this);
     }
 
+    //在需要用到的地方切换状态。
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_loading:
-                mStateManager.showLoading();
+                mStateManager.showLoading();//切换到Loading状态
                 break;
             case R.id.bt_empty:
-                mStateManager.showEmpty();
+                mStateManager.showEmpty();//切换到空数据状态
                 break;
             case R.id.bt_error:
-                mStateManager.showError();
+                mStateManager.showError();//切换到异常状态
                 break;
             case R.id.bt_net_error:
-                mStateManager.showNetError();
+                mStateManager.showNetError();//切换到网络异常状态
                 break;
             case R.id.bt_content:
-                mStateManager.showContent();
+                mStateManager.showContent();//切换到默认状态
                 break;
         }
     }

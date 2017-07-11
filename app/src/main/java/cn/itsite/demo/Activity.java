@@ -42,21 +42,20 @@ public class Activity extends AppCompatActivity implements View.OnClickListener 
         btContent = (Button) findViewById(R.id.bt_content);
 
         mStateManager = StateManager.builder(this)
-                .setContent(this)
-                .setEmptyView(R.layout.state_empty)
+                .setContent(this)//为哪部分内容添加状态管理。这里可以是Activity，Fragment或任何View。
                 .setErrorOnClickListener(new StateListener.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(View view) {//添加异常状态时的点击事件。
                         showToast("错误状态");
                     }
                 })
                 .setEmptyOnClickListener(new StateListener.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(View view) {//添加空数据状态时的点击事件。
                         showToast("空状态");
                     }
                 })
-                .build();
+                .build();//构建
     }
 
     private void initData() {

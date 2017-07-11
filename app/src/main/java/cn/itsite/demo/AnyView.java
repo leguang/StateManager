@@ -43,32 +43,32 @@ public class AnyView extends AppCompatActivity implements View.OnClickListener {
         btNetError = (Button) findViewById(R.id.bt_net_error);
         btContent = (Button) findViewById(R.id.bt_content);
 
-        mStateManager = StateManager.builder(this)
-                .setContent(textView)
-                .setLoadingView(R.layout.state_loading)
-                .setLoadingText("加载我只服你…")
-                .setEmptyView(R.layout.state_empty)
-                .setEmptyImage(R.drawable.ic_empty_state_200px)
-                .setEmptyText("大爷，实在是没有数据了")
-                .setEmptyOnClickListener(new StateListener.OnClickListener() {
+        mStateManager = StateManager.builder(this)//通过Build模式构建。
+                .setContent(textView)//为哪部分内容添加状态管理。这里可以是Activity，Fragment或任何View。
+                .setLoadingView(R.layout.state_loading)//设置Loading的布局样式。
+                .setLoadingText("加载我只服你…")//当然要想这个文字起作用，布局中的TextView的id必须为tv_loading_state。
+                .setEmptyView(R.layout.state_empty)//设置空数据的布局样式。
+                .setEmptyImage(R.drawable.ic_empty_state_200px)//当然要想设置图片起作用，ImageView的id必须为iv_empty_state。
+                .setEmptyText("大爷，实在是没有数据了")//当然要想这个文字起作用，布局中的TextView的id必须为tv_empty_state。
+                .setEmptyOnClickListener(new StateListener.OnClickListener() {//设置点击事件。
                     @Override
                     public void onClick(View view) {
                         showToast("空状态");
                     }
                 })
-                .setErrorView(R.layout.state_error)
-                .setErrorImage(R.drawable.ic_empty_state_200px)
-                .setErrorText("大爷，出错了")
-                .setErrorOnClickListener(new StateListener.OnClickListener() {
+                .setErrorView(R.layout.state_error)//设置异常状态的布局样式。
+                .setErrorImage(R.drawable.ic_empty_state_200px)//当然要想设置图片起作用，ImageView的id必须为iv_error_state。
+                .setErrorText("大爷，出错了")//当然要想这个文字起作用，布局中的TextView的id必须为tv_error_state。
+                .setErrorOnClickListener(new StateListener.OnClickListener() {//设置点击事件。
                     @Override
                     public void onClick(View view) {
                         showToast("错误状态");
                     }
                 })
-                .setNetErrorView(R.layout.state_net_error)
-                .setNetErrorImage(R.drawable.ic_empty_state_200px)
-                .setNetErrorText("大爷，有人拔网线了")
-                .setNetErrorOnClickListener(new StateListener.OnClickListener() {
+                .setNetErrorView(R.layout.state_net_error)//设置网络异常状态的布局样式。
+                .setNetErrorImage(R.drawable.ic_empty_state_200px)//当然要想设置图片起作用，ImageView的id必须为iv_net_error_state。
+                .setNetErrorText("大爷，有人拔网线了")//当然要想这个文字起作用，布局中的TextView的id必须为tv_net_error_state。
+                .setNetErrorOnClickListener(new StateListener.OnClickListener() {//设置点击事件。
                     @Override
                     public void onClick(View view) {
                         showToast("谁拔了我的网线");

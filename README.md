@@ -3,7 +3,7 @@
 [![Release](https://jitpack.io/v/leguang/StateManager.svg)](https://jitpack.io/#leguang/StateManager)
 
 StateManager是一个页面状态管理工具，可以让开发者方便而又灵活地切换界面的状态。（欢迎Star一下）
-## 能做什么？([下载 apk]( ))
+## 能做什么？([下载 apk](https://github.com/leguang/StateManager/blob/master/app-debug.apk))
 - **不必在XML中配置Layout即可给任何界面添加状态，不论是Activity或者是Fragment亦或者View**
 - **默认提供空数据状态，异常状态，网络异常状态，Loading状态**
 - **简洁的API，简单的配置**

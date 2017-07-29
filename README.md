@@ -24,7 +24,8 @@ StateManager是一个页面状态管理工具，可以让开发者方便而又�
 2. 然后在App目录下的dependencies添加:
 ```
 	dependencies {
-	        compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.7'
+	         //页面状态管理
+   		 compile 'com.github.leguang:StateManager:1.0.1'
 	}
 ```
 此时同步一下，即已完成引入。

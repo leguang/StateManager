@@ -28,6 +28,7 @@ public class StateLayout extends FrameLayout {
     public static final String TAG = StateLayout.class.getSimpleName();
     private View mContentView, mLoadingView, mEmptyView, mErrorView, mNetErrorView;
     int loadingLayoutId, emptyLayoutId, errorLayoutId, netErrorLayoutId;
+    private StateListener.ConvertListener mConvertListener;
 
     public StateLayout(Context context) {
         this(context, null);
@@ -364,9 +365,9 @@ public class StateLayout extends FrameLayout {
         }
     }
 
-    public void setNetErrorOnClickListener(final StateListener.OnClickListener listener) {
+    public StateLayout setNetErrorOnClickListener(final StateListener.OnClickListener listener) {
         if (mNetErrorView == null) {
-            return;
+            return this;
         }
         mNetErrorView.setOnClickListener(new OnClickListener() {
             @Override
@@ -380,11 +381,12 @@ public class StateLayout extends FrameLayout {
                 }
             }
         });
+        return this;
     }
 
-    public void setErrorOnClickListener(final StateListener.OnClickListener listener) {
+    public StateLayout setErrorOnClickListener(final StateListener.OnClickListener listener) {
         if (listener == null || mErrorView == null) {
-            return;
+            return this;
         }
         mErrorView.setOnClickListener(new OnClickListener() {
             @Override
@@ -392,11 +394,13 @@ public class StateLayout extends FrameLayout {
                 listener.onClick(v);
             }
         });
+        return this;
     }
 
-    public void setEmptyOnClickListener(final StateListener.OnClickListener listener) {
+    public StateLayout setEmptyOnClickListener(final StateListener.OnClickListener listener) {
         if (listener == null || mEmptyView == null) {
-            return;
+            return this;
+
         }
         mEmptyView.setOnClickListener(new OnClickListener() {
             @Override
@@ -404,6 +408,15 @@ public class StateLayout extends FrameLayout {
                 listener.onClick(v);
             }
         });
+        return this;
+    }
+
+    public StateLayout setConvertListener(final StateListener.ConvertListener listener) {
+        mConvertListener = listener;
+        if (mConvertListener != null) {
+            mConvertListener.convert(new BaseViewHolder(this), this);
+        }
+        return this;
     }
 
     /**

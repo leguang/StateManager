@@ -1,4 +1,4 @@
-package cn.itsite.demo;
+package cn.itsite.demo.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.itsite.demo.R;
+import cn.itsite.demo.utils.ToastUtils;
+import cn.itsite.statemanager.BaseViewHolder;
+import cn.itsite.statemanager.StateLayout;
 import cn.itsite.statemanager.StateListener;
 import cn.itsite.statemanager.StateManager;
 
@@ -55,17 +59,36 @@ public class RecyclerView extends AppCompatActivity implements View.OnClickListe
 
         mStateManager = StateManager.builder(this)
                 .setContent(recyclerView)
-                .setEmptyView(R.layout.state_empty)
-                .setErrorOnClickListener(new StateListener.OnClickListener() {
+                .setEmptyView(R.layout.state_custom)
+                .setConvertListener(new StateListener.ConvertListener() {
                     @Override
-                    public void onClick(View view) {
-                        showToast("错误状态");
-                    }
-                })
-                .setEmptyOnClickListener(new StateListener.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        showToast("空状态");
+                    public void convert(BaseViewHolder holder, StateLayout stateLayout) {
+                        holder.setOnClickListener(R.id.bt0, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "点击了正中间");
+                            }
+                        }).setOnClickListener(R.id.bt1, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "点击了左上角");
+                            }
+                        }).setOnClickListener(R.id.bt2, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "点击了右上角");
+                            }
+                        }).setOnClickListener(R.id.bt3, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "点击了左下角");
+                            }
+                        }).setOnClickListener(R.id.bt4, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "点击了右上角");
+                            }
+                        });
                     }
                 })
                 .build();

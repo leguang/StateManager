@@ -6,6 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import cn.itsite.demo.demo.Activity;
+import cn.itsite.demo.demo.AnyView;
+import cn.itsite.demo.demo.FragmentActivity;
+import cn.itsite.demo.demo.RecyclerView;
+import cn.itsite.demo.demo.WebView;
+
 
 /**
  * Author：leguang on 2016/10/12 0009 15:49

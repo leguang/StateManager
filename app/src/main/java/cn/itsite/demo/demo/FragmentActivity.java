@@ -1,7 +1,9 @@
-package cn.itsite.demo;
+package cn.itsite.demo.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import cn.itsite.demo.R;
 
 
 /**

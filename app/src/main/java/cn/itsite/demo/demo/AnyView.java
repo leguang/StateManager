@@ -1,4 +1,4 @@
-package cn.itsite.demo;
+package cn.itsite.demo.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.itsite.demo.R;
 import cn.itsite.statemanager.StateListener;
 import cn.itsite.statemanager.StateManager;
 

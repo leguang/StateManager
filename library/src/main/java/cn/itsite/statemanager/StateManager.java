@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -74,31 +73,31 @@ public class StateManager {
 
 
     private void initStateLayout(StateLayout stateLayout, Builder builder) {
-        stateLayout.setLoadingView(builder.loadingLayoutId);
-        stateLayout.setLoadingView(builder.loadingView);
-        stateLayout.setLoadingText(builder.loadingText);
+        stateLayout.setLoadingView(builder.loadingLayoutId)
+                .setLoadingView(builder.loadingView)
+                .setLoadingText(builder.loadingText);
 
-        stateLayout.setEmptyView(builder.emptyLayoutId);
-        stateLayout.setEmptyView(builder.emptyView);
-        stateLayout.setEmptyImage(builder.emptyImageId);
-        stateLayout.setEmptyText(builder.emptyText);
+        stateLayout.setEmptyView(builder.emptyLayoutId)
+                .setEmptyView(builder.emptyView)
+                .setEmptyImage(builder.emptyImageId)
+                .setEmptyText(builder.emptyText);
 
-        stateLayout.setErrorView(builder.errorLayoutId);
-        stateLayout.setErrorView(builder.errorView);
-        stateLayout.setErrorImage(builder.errorImageId);
-        stateLayout.setErrorText(builder.errorText);
+        stateLayout.setErrorView(builder.errorLayoutId)
+                .setErrorView(builder.errorView)
+                .setErrorImage(builder.errorImageId)
+                .setErrorText(builder.errorText);
 
-        stateLayout.setNetErrorView(builder.netErrorLayoutId);
-        stateLayout.setNetErrorView(builder.netErrorView);
-        stateLayout.setNetErrorImage(builder.netErrorImageId);
-        stateLayout.setNetErrorText(builder.netErrorText);
+        stateLayout.setNetErrorView(builder.netErrorLayoutId)
+                .setNetErrorView(builder.netErrorView)
+                .setNetErrorImage(builder.netErrorImageId)
+                .setNetErrorText(builder.netErrorText);
 
-        stateLayout.setEmptyOnClickListener(builder.emptyListener);
-        stateLayout.setErrorOnClickListener(builder.errorListener);
-        stateLayout.setNetErrorOnClickListener(builder.netErrorListener);
+        stateLayout.setEmptyOnClickListener(builder.emptyListener)
+                .setErrorOnClickListener(builder.errorListener)
+                .setNetErrorOnClickListener(builder.netErrorListener)
+                .setConvertListener(builder.convertListener);
         mStateLayout = stateLayout;
     }
-
 
     public void showLoading() {
         mStateLayout.showLoading();
@@ -149,6 +148,7 @@ public class StateManager {
         private StateListener.OnClickListener netErrorListener;
         private StateListener.OnClickListener errorListener;
         private StateListener.OnClickListener emptyListener;
+        private StateListener.ConvertListener convertListener;
 
         public Builder(@NonNull Context context) {
             this.context = context;
@@ -275,6 +275,11 @@ public class StateManager {
 
         public Builder setEmptyOnClickListener(StateListener.OnClickListener listener) {
             this.emptyListener = listener;
+            return this;
+        }
+
+        public Builder setConvertListener(StateListener.ConvertListener listener) {
+            this.convertListener = listener;
             return this;
         }
 

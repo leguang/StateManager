@@ -1,4 +1,4 @@
-package cn.itsite.demo;
+package cn.itsite.demo.demo;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.webkit.WebSettings;
 import android.widget.Button;
 import android.widget.Toast;
 
+import cn.itsite.demo.R;
 import cn.itsite.statemanager.StateListener;
 import cn.itsite.statemanager.StateManager;
 

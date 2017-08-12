@@ -38,4 +38,11 @@
         android:text="Any View"
         android:textSize="12sp" />
 
+    <Button
+        android:id="@+id/bt_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="在布局中使用"
+        android:textSize="12sp" />
+
 </LinearLayout>

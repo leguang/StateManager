@@ -9,6 +9,7 @@ import android.widget.Button;
 import cn.itsite.demo.demo.Activity;
 import cn.itsite.demo.demo.AnyView;
 import cn.itsite.demo.demo.FragmentActivity;
+import cn.itsite.demo.demo.Layout;
 import cn.itsite.demo.demo.RecyclerView;
 import cn.itsite.demo.demo.WebView;
 
@@ -20,7 +21,7 @@ import cn.itsite.demo.demo.WebView;
  * 页面状态Demo。
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button bt0, bt1, bt2, bt3, bt4;
+    private Button bt0, bt1, bt2, bt3, bt4, bt5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt2 = (Button) findViewById(R.id.bt_recyclerview);
         bt3 = (Button) findViewById(R.id.bt_webview);
         bt4 = (Button) findViewById(R.id.bt_any_view);
+        bt5 = (Button) findViewById(R.id.bt_layout);
     }
 
     private void initData() {
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt2.setOnClickListener(this);
         bt3.setOnClickListener(this);
         bt4.setOnClickListener(this);
+        bt5.setOnClickListener(this);
     }
 
     @Override
@@ -63,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_any_view:
                 startActivity(new Intent(this, AnyView.class));
+                break;
+            case R.id.bt_layout:
+                startActivity(new Intent(this, Layout.class));
                 break;
         }
     }

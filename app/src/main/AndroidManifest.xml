@@ -22,6 +22,7 @@
         <activity android:name=".demo.RecyclerView" />
         <activity android:name=".demo.WebView" />
         <activity android:name=".demo.AnyView" />
+        <activity android:name=".demo.Layout" />
     </application>
 
 </manifest>

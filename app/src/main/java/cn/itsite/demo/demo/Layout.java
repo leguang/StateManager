@@ -101,7 +101,7 @@ public class Layout extends AppCompatActivity implements View.OnClickListener {
                 super.onGeolocationPermissionsShowPrompt(origin, callback);
             }
         });
-        webView.loadUrl("https://github.com/");
+        webView.loadUrl("https://github.com/leguang/StateManager");
     }
 
     @Override

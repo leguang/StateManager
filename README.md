@@ -34,39 +34,6 @@ StateManager是一个页面状态管理工具，可以让开发者方便而又�
 
 ```
 //首先配置一下：
-StateManager mStateManager = StateManager.builder(this)
-                .setContent(this)//为哪部分内容添加状态管理。这里可以是Activity，Fragment或任何View。
-                .setErrorOnClickListener(new StateListener.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {//添加异常状态时的点击事件。
-                        showToast("错误状态");
-                    }
-                })
-                .setEmptyOnClickListener(new StateListener.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {//添加空数据状态时的点击事件。
-                        showToast("空状态");
-                    }
-                })
-                .build();//构建
- 
-//在需要用到的地方切换状态。
-
-mStateManager.showLoading();//切换到Loading状态
-
-mStateManager.showEmpty();//切换到空数据状态
-
-mStateManager.showError();//切换到异常状态
-
-mStateManager.showNetError();//切换到网络异常状态
-
-mStateManager.showContent();//切换到默认状态
-
-```
-
-## 高级用法：
-你也可以自己定制状态页面样式
-```
  StateManager mStateManager = StateManager.builder(this)//通过Build模式构建。
                 .setContent(textView)//为哪部分内容添加状态管理。这里可以是Activity，Fragment或任何View。
                 .setLoadingView(R.layout.state_loading)//设置Loading的布局样式。
@@ -99,12 +66,69 @@ mStateManager.showContent();//切换到默认状态
                     }
                 })
                 .build();
+ 
+//在需要用到的地方切换状态。
+
+mStateManager.showLoading();//切换到Loading状态
+
+mStateManager.showEmpty();//切换到空数据状态
+
+mStateManager.showError();//切换到异常状态
+
+mStateManager.showNetError();//切换到网络异常状态
+
+mStateManager.showContent();//切换到默认状态
+
+```
+
+## 高级用法：
+你也可以自己定制状态页面样式
+
+```
+mStateManager = StateManager.builder(this)
+                .setContent(recyclerView)
+                .setEmptyView(R.layout.state_custom)
+                .setConvertListener(new StateListener.ConvertListener() {
+                    @Override
+                    public void convert(BaseViewHolder holder, StateLayout stateLayout) {
+                        holder.setOnClickListener(R.id.bt0, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "点击了正中间");
+                            }
+                        }).setOnClickListener(R.id.bt1, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "点击了左上角");
+                            }
+                        }).setOnClickListener(R.id.bt2, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "点击了右上角");
+                            }
+                        }).setOnClickListener(R.id.bt3, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "点击了左下角");
+                            }
+                        }).setOnClickListener(R.id.bt4, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "点击了右上角");
+                            }
+                        });
+                    }
+                })
+                .build();
+
 ```
 
 >**持续更新!，欢迎Issues+Star项目**
 
 ## 感谢
 [hongyangAndroid/LoadingAndRetryManager](https://github.com/hongyangAndroid/LoadingAndRetryManager)
+
+[CymChad/BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 
 
 ## License

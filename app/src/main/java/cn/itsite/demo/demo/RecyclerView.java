@@ -59,7 +59,9 @@ public class RecyclerView extends AppCompatActivity implements View.OnClickListe
 
         mStateManager = StateManager.builder(this)
                 .setContent(recyclerView)
-                .setEmptyView(R.layout.state_custom)
+                .setEmptyView(R.layout.state_custom_empty)
+                .setErrorView(R.layout.state_custom_error)
+                .setLoadingView(R.layout.state_custom_loading)
                 .setConvertListener(new StateListener.ConvertListener() {
                     @Override
                     public void convert(BaseViewHolder holder, StateLayout stateLayout) {
@@ -87,6 +89,16 @@ public class RecyclerView extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(View view) {
                                 ToastUtils.showToast(RecyclerView.this, "点击了右上角");
+                            }
+                        }).setOnClickListener(R.id.tv_error, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "出错了");
+                            }
+                        }).setOnClickListener(R.id.tv_loading, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "刷新");
                             }
                         });
                     }

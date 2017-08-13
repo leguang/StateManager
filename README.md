@@ -87,7 +87,9 @@ mStateManager.showContent();//切换到默认状态
 ```
 mStateManager = StateManager.builder(this)
                 .setContent(recyclerView)
-                .setEmptyView(R.layout.state_custom)
+                .setEmptyView(R.layout.state_custom_empty)
+                .setErrorView(R.layout.state_custom_error)
+                .setLoadingView(R.layout.state_custom_loading)
                 .setConvertListener(new StateListener.ConvertListener() {
                     @Override
                     public void convert(BaseViewHolder holder, StateLayout stateLayout) {
@@ -116,11 +118,20 @@ mStateManager = StateManager.builder(this)
                             public void onClick(View view) {
                                 ToastUtils.showToast(RecyclerView.this, "点击了右上角");
                             }
+                        }).setOnClickListener(R.id.tv_error, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "出错了");
+                            }
+                        }).setOnClickListener(R.id.tv_loading, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ToastUtils.showToast(RecyclerView.this, "刷新");
+                            }
                         });
                     }
                 })
                 .build();
-
 ```
 
 >**持续更新!，欢迎Issues+Star项目**

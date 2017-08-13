@@ -10,7 +10,8 @@
     <cn.itsite.statemanager.StateLayout
         android:id="@+id/stateLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         app:emptyLayout="@layout/state_empty"
         app:errorLayout="@layout/state_error"
         app:loadingLayout="@layout/state_loading"

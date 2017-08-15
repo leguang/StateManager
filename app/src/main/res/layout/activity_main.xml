@@ -10,25 +10,29 @@
         android:id="@+id/bt_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Activity" />
+        android:text="Activity"
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/bt_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fragment" />
+        android:text="Fragment"
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/bt_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RecyclerView" />
+        android:text="RecyclerView"
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/bt_webview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="WebView"
+        android:textAllCaps="false"
         android:textSize="12sp" />
 
     <Button
@@ -36,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Any View"
+        android:textAllCaps="false"
         android:textSize="12sp" />
 
     <Button
@@ -43,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="在布局中使用"
+        android:textAllCaps="false"
         android:textSize="12sp" />
 
 </LinearLayout>

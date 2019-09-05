@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import cn.itsite.demo.R;
-import cn.itsite.statemanager.StateListener;
 import cn.itsite.statemanager.StateManager;
 
 
@@ -52,13 +51,13 @@ public class Fragment extends android.support.v4.app.Fragment implements View.On
         mStateManager = StateManager.builder(getContext())
                 .setContent(this)
                 .setEmptyView(R.layout.state_empty)
-                .setErrorOnClickListener(new StateListener.OnClickListener() {
+                .setErrorOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         showToast("错误状态");
                     }
                 })
-                .setEmptyOnClickListener(new StateListener.OnClickListener() {
+                .setEmptyOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         showToast("空状态");

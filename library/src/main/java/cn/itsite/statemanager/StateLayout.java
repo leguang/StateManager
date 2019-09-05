@@ -1,18 +1,14 @@
 package cn.itsite.statemanager;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.TypedArray;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -75,83 +71,87 @@ public class StateLayout extends FrameLayout {
         if (layoutId == 0) {
             return this;
         }
-        return setLoadingView(inflate(getContext(), layoutId, null));
+        LayoutInflater factory = LayoutInflater.from(getContext());
+        View inflate = factory.inflate(layoutId, this, false);
+        return setLoadingView(inflate);
     }
 
     public StateLayout setEmptyView(@LayoutRes int layoutId) {
         if (layoutId == 0) {
             return this;
         }
-        return setEmptyView(inflate(getContext(), layoutId, null));
+        LayoutInflater factory = LayoutInflater.from(getContext());
+        View inflate = factory.inflate(layoutId, this, false);
+        return setEmptyView(inflate);
     }
 
     public StateLayout setErrorView(@LayoutRes int layoutId) {
         if (layoutId == 0) {
             return this;
         }
-        return setErrorView(inflate(getContext(), layoutId, null));
+        LayoutInflater factory = LayoutInflater.from(getContext());
+        View inflate = factory.inflate(layoutId, this, false);
+        return setErrorView(inflate);
     }
 
     public StateLayout setNetErrorView(@LayoutRes int layoutId) {
         if (layoutId == 0) {
             return null;
         }
-        return setNetErrorView(inflate(getContext(), layoutId, null));
+        LayoutInflater factory = LayoutInflater.from(getContext());
+        View inflate = factory.inflate(layoutId, this, false);
+        return setNetErrorView(inflate);
     }
 
     public StateLayout setLoadingView(@Nullable View view) {
-        if (view == null) {
-            return this;
+        if (view != null) {
+            if (mLoadingView != null) {
+                removeView(mLoadingView);
+                Log.w(TAG, "you have already set a loading view and would be instead of this new one.");
+            }
+            addView(view, view.getLayoutParams());
+            mLoadingView = view;
+            mLoadingView.setVisibility(GONE);
         }
-        if (mLoadingView != null) {
-            removeView(mLoadingView);
-            Log.w(TAG, "you have already set a loading view and would be instead of this new one.");
-        }
-        addView(view);
-        mLoadingView = view;
-        mLoadingView.setVisibility(GONE);
         return this;
     }
 
     public StateLayout setEmptyView(@Nullable View view) {
-        if (view == null) {
-            return this;
+        if (view != null) {
+            if (mEmptyView != null) {
+                removeView(mEmptyView);
+                Log.w(TAG, "you have already set a empty view and would be instead of this new one.");
+            }
+            addView(view, view.getLayoutParams());
+            mEmptyView = view;
+            mEmptyView.setVisibility(GONE);
         }
-        if (mEmptyView != null) {
-            removeView(mEmptyView);
-            Log.w(TAG, "you have already set a empty view and would be instead of this new one.");
-        }
-        addView(view);
-        mEmptyView = view;
-        mEmptyView.setVisibility(GONE);
         return this;
     }
 
     public StateLayout setErrorView(@Nullable View view) {
-        if (view == null) {
-            return this;
+        if (view != null) {
+            if (mErrorView != null) {
+                removeView(mErrorView);
+                Log.w(TAG, "you have already set a error view and would be instead of this new one.");
+            }
+            addView(view, view.getLayoutParams());
+            mErrorView = view;
+            mErrorView.setVisibility(GONE);
         }
-        if (mErrorView != null) {
-            removeView(mErrorView);
-            Log.w(TAG, "you have already set a error view and would be instead of this new one.");
-        }
-        addView(view);
-        mErrorView = view;
-        mErrorView.setVisibility(GONE);
         return this;
     }
 
     public StateLayout setNetErrorView(@Nullable View view) {
-        if (view == null) {
-            return this;
+        if (view != null) {
+            if (mNetErrorView != null) {
+                removeView(mNetErrorView);
+                Log.w(TAG, "you have already set a net error view and would be instead of this new one.");
+            }
+            addView(view, view.getLayoutParams());
+            mNetErrorView = view;
+            mNetErrorView.setVisibility(GONE);
         }
-        if (mNetErrorView != null) {
-            removeView(mNetErrorView);
-            Log.w(TAG, "you have already set a net error view and would be instead of this new one.");
-        }
-        addView(view);
-        mNetErrorView = view;
-        mNetErrorView.setVisibility(GONE);
         return this;
     }
 
@@ -169,88 +169,72 @@ public class StateLayout extends FrameLayout {
     }
 
     public StateLayout setEmptyImage(@DrawableRes int imageId) {
-        if (imageId == 0 || mEmptyView == null) {
-            return this;
+        if (imageId != 0 && mEmptyView != null) {
+            View view = mEmptyView.findViewById(R.id.iv_empty_state);
+            if (view instanceof ImageView) {
+                ((ImageView) view).setImageResource(imageId);
+            }
         }
-
-        View view = mEmptyView.findViewById(R.id.iv_empty_state);
-        if (view instanceof ImageView) {
-            ((ImageView) view).setImageResource(imageId);
-        }
-
         return this;
     }
 
     public StateLayout setEmptyText(@Nullable CharSequence emptyText) {
-        if (TextUtils.isEmpty(emptyText) || mEmptyView == null) {
-            return this;
+        if (!TextUtils.isEmpty(emptyText) && mEmptyView != null) {
+            View view = mEmptyView.findViewById(R.id.tv_empty_state);
+            if (view instanceof TextView) {
+                ((TextView) view).setText(emptyText);
+            }
         }
-
-        View view = mEmptyView.findViewById(R.id.tv_empty_state);
-        if (view instanceof TextView) {
-            ((TextView) view).setText(emptyText);
-        }
-
         return this;
     }
 
     public StateLayout setErrorImage(@DrawableRes int imageId) {
-        if (imageId == 0 || mErrorView == null) {
-            return this;
-        }
-
-        View view = mErrorView.findViewById(R.id.iv_error_state);
-        if (view instanceof ImageView) {
-            ((ImageView) view).setImageResource(imageId);
+        if (imageId != 0 && mErrorView != null) {
+            View view = mErrorView.findViewById(R.id.iv_error_state);
+            if (view instanceof ImageView) {
+                ((ImageView) view).setImageResource(imageId);
+            }
         }
         return this;
     }
 
     public StateLayout setErrorText(@Nullable CharSequence errorText) {
-        if (TextUtils.isEmpty(errorText) || mErrorView == null) {
-            return this;
-        }
-        View view = mErrorView.findViewById(R.id.tv_error_state);
-        if (view instanceof TextView) {
-            ((TextView) view).setText(errorText);
+        if (!TextUtils.isEmpty(errorText) && mErrorView != null) {
+            View view = mErrorView.findViewById(R.id.tv_error_state);
+            if (view instanceof TextView) {
+                ((TextView) view).setText(errorText);
+            }
         }
         return this;
     }
 
 
     public StateLayout setNetErrorImage(@DrawableRes int imageId) {
-        if (imageId == 0 || mNetErrorView == null) {
-            return this;
+        if (imageId != 0 && mNetErrorView != null) {
+            View view = mNetErrorView.findViewById(R.id.iv_net_error_state);
+            if (view instanceof ImageView) {
+                ((ImageView) view).setImageResource(imageId);
+            }
         }
-
-        View view = mNetErrorView.findViewById(R.id.iv_net_error_state);
-        if (view instanceof ImageView) {
-            ((ImageView) view).setImageResource(imageId);
-        }
-
         return this;
     }
 
     public StateLayout setNetErrorText(@Nullable CharSequence netErrorText) {
-        if (TextUtils.isEmpty(netErrorText) || mNetErrorView == null) {
-            return this;
-        }
-
-        View view = mNetErrorView.findViewById(R.id.tv_net_error_state);
-        if (view instanceof TextView) {
-            ((TextView) view).setText(netErrorText);
+        if (!TextUtils.isEmpty(netErrorText) && mNetErrorView != null) {
+            View view = mNetErrorView.findViewById(R.id.tv_net_error_state);
+            if (view instanceof TextView) {
+                ((TextView) view).setText(netErrorText);
+            }
         }
         return this;
     }
 
     public StateLayout setLoadingText(@Nullable CharSequence loadingText) {
-        if (TextUtils.isEmpty(loadingText) || mLoadingView == null) {
-            return this;
-        }
-
-        View view = mLoadingView.findViewById(R.id.tv_loading_state);
-        if (view instanceof TextView) {
-            ((TextView) view).setText(loadingText);
+        if (!TextUtils.isEmpty(loadingText) && mLoadingView != null) {
+            View view = mLoadingView.findViewById(R.id.tv_loading_state);
+            if (view instanceof TextView) {
+                ((TextView) view).setText(loadingText);
+            }
         }
         return this;
     }
@@ -365,49 +349,24 @@ public class StateLayout extends FrameLayout {
         }
     }
 
-    public StateLayout setNetErrorOnClickListener(final StateListener.OnClickListener listener) {
-        if (mNetErrorView == null) {
-            return this;
+    public StateLayout setNetErrorOnClickListener(final OnClickListener listener) {
+        if (mNetErrorView != null) {
+            mNetErrorView.setOnClickListener(listener);
         }
-        mNetErrorView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (listener != null) {
-                    listener.onClick(v);
-
-                } else if (!isNetWorkAvailable(v.getContext())) {
-                    showDialog();
-                }
-            }
-        });
         return this;
     }
 
-    public StateLayout setErrorOnClickListener(final StateListener.OnClickListener listener) {
-        if (listener == null || mErrorView == null) {
-            return this;
+    public StateLayout setErrorOnClickListener(final OnClickListener listener) {
+        if (listener != null && mErrorView != null) {
+            mErrorView.setOnClickListener(listener);
         }
-        mErrorView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onClick(v);
-            }
-        });
         return this;
     }
 
-    public StateLayout setEmptyOnClickListener(final StateListener.OnClickListener listener) {
-        if (listener == null || mEmptyView == null) {
-            return this;
-
+    public StateLayout setEmptyOnClickListener(final OnClickListener listener) {
+        if (listener != null && mEmptyView != null) {
+            mEmptyView.setOnClickListener(listener);
         }
-        mEmptyView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onClick(v);
-            }
-        });
         return this;
     }
 
@@ -417,49 +376,5 @@ public class StateLayout extends FrameLayout {
             mConvertListener.convert(new BaseViewHolder(this), this);
         }
         return this;
-    }
-
-    /**
-     * 判断是否有网络。
-     *
-     * @param context 上下文
-     * @return
-     */
-    private static boolean isNetWorkAvailable(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager == null) {
-            return false;
-        } else {
-            NetworkInfo info = connectivityManager.getActiveNetworkInfo();
-            if (info == null) {
-                return false;
-            } else {
-                if (info.isAvailable()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 当判断当前手机没有网络时选择是否打开网络设置。
-     */
-    private void showDialog() {
-        new AlertDialog.Builder(this.getContext())
-                .setTitle("提示")
-                .setMessage("当前网络无效，请问是否去设置更换网络？")
-                .setPositiveButton("去设置", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // 跳转到系统的网络设置界面
-                        Intent intent = new Intent(android.provider.Settings.ACTION_SETTINGS);
-                        StateLayout.this.getContext().startActivity(intent);
-                        dialog.dismiss();
-                    }
-                }).setNegativeButton("知道了", null)
-                .show();
     }
 }

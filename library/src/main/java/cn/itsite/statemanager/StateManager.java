@@ -19,7 +19,6 @@ import android.view.ViewGroup;
  */
 public class StateManager {
     private static final String TAG = StateManager.class.getSimpleName();
-
     private StateLayout mStateLayout;
 
     private StateManager(Builder builder) {
@@ -28,12 +27,11 @@ public class StateManager {
         if (builder.content instanceof Activity) {
             Activity activity = (Activity) builder.content;
             context = activity;
-            contentParent = (ViewGroup) activity.findViewById(android.R.id.content);
+            contentParent = activity.findViewById(android.R.id.content);
         } else if (builder.content instanceof Fragment) {
             Fragment fragment = (Fragment) builder.content;
             context = fragment.getActivity();
             contentParent = (ViewGroup) (fragment.getView().getParent());
-
         } else if (builder.content instanceof View) {
             View view = (View) builder.content;
             contentParent = (ViewGroup) (view.getParent());
@@ -70,7 +68,6 @@ public class StateManager {
     private StateManager(StateLayout stateLayout, Builder builder) {
         initStateLayout(stateLayout, builder);
     }
-
 
     private void initStateLayout(StateLayout stateLayout, Builder builder) {
         stateLayout.setLoadingView(builder.loadingLayoutId)
@@ -145,9 +142,9 @@ public class StateManager {
         private CharSequence errorText;
         private int netErrorImageId;
         private CharSequence netErrorText;
-        private StateListener.OnClickListener netErrorListener;
-        private StateListener.OnClickListener errorListener;
-        private StateListener.OnClickListener emptyListener;
+        private View.OnClickListener netErrorListener;
+        private View.OnClickListener errorListener;
+        private View.OnClickListener emptyListener;
         private StateListener.ConvertListener convertListener;
 
         public Builder(@NonNull Context context) {
@@ -263,17 +260,17 @@ public class StateManager {
             return this;
         }
 
-        public Builder setNetErrorOnClickListener(StateListener.OnClickListener listener) {
+        public Builder setNetErrorOnClickListener(View.OnClickListener listener) {
             this.netErrorListener = listener;
             return this;
         }
 
-        public Builder setErrorOnClickListener(StateListener.OnClickListener listener) {
+        public Builder setErrorOnClickListener(View.OnClickListener listener) {
             this.errorListener = listener;
             return this;
         }
 
-        public Builder setEmptyOnClickListener(StateListener.OnClickListener listener) {
+        public Builder setEmptyOnClickListener(View.OnClickListener listener) {
             this.emptyListener = listener;
             return this;
         }

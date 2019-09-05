@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cn.itsite.demo.R;
-import cn.itsite.statemanager.StateListener;
 import cn.itsite.statemanager.StateManager;
 
 /**
@@ -51,7 +50,7 @@ public class AnyView extends AppCompatActivity implements View.OnClickListener {
                 .setEmptyView(R.layout.state_empty)//设置空数据的布局样式。
                 .setEmptyImage(R.drawable.ic_empty_state_200px)//当然要想设置图片起作用，ImageView的id必须为iv_empty_state。
                 .setEmptyText("大爷，实在是没有数据了")//当然要想这个文字起作用，布局中的TextView的id必须为tv_empty_state。
-                .setEmptyOnClickListener(new StateListener.OnClickListener() {//设置点击事件。
+                .setEmptyOnClickListener(new View.OnClickListener() {//设置点击事件。
                     @Override
                     public void onClick(View view) {
                         showToast("空状态");
@@ -60,7 +59,7 @@ public class AnyView extends AppCompatActivity implements View.OnClickListener {
                 .setErrorView(R.layout.state_error)//设置异常状态的布局样式。
                 .setErrorImage(R.drawable.ic_empty_state_200px)//当然要想设置图片起作用，ImageView的id必须为iv_error_state。
                 .setErrorText("大爷，出错了")//当然要想这个文字起作用，布局中的TextView的id必须为tv_error_state。
-                .setErrorOnClickListener(new StateListener.OnClickListener() {//设置点击事件。
+                .setErrorOnClickListener(new View.OnClickListener() {//设置点击事件。
                     @Override
                     public void onClick(View view) {
                         showToast("错误状态");
@@ -69,7 +68,7 @@ public class AnyView extends AppCompatActivity implements View.OnClickListener {
                 .setNetErrorView(R.layout.state_net_error)//设置网络异常状态的布局样式。
                 .setNetErrorImage(R.drawable.ic_empty_state_200px)//当然要想设置图片起作用，ImageView的id必须为iv_net_error_state。
                 .setNetErrorText("大爷，有人拔网线了")//当然要想这个文字起作用，布局中的TextView的id必须为tv_net_error_state。
-                .setNetErrorOnClickListener(new StateListener.OnClickListener() {//设置点击事件。
+                .setNetErrorOnClickListener(new View.OnClickListener() {//设置点击事件。
                     @Override
                     public void onClick(View view) {
                         showToast("谁拔了我的网线");

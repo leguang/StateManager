@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import cn.itsite.demo.R;
-import cn.itsite.statemanager.StateListener;
 import cn.itsite.statemanager.StateManager;
 
 
@@ -44,13 +43,13 @@ public class Activity extends AppCompatActivity implements View.OnClickListener 
 
         mStateManager = StateManager.builder(this)
                 .setContent(this)//为哪部分内容添加状态管理。这里可以是Activity，Fragment或任何View。
-                .setErrorOnClickListener(new StateListener.OnClickListener() {
+                .setErrorOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {//添加异常状态时的点击事件。
                         showToast("错误状态");
                     }
                 })
-                .setEmptyOnClickListener(new StateListener.OnClickListener() {
+                .setEmptyOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {//添加空数据状态时的点击事件。
                         showToast("空状态");

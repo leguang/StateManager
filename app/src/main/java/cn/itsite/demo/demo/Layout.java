@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import cn.itsite.demo.R;
 import cn.itsite.statemanager.StateLayout;
-import cn.itsite.statemanager.StateListener;
 import cn.itsite.statemanager.StateManager;
 
 
@@ -54,13 +53,13 @@ public class Layout extends AppCompatActivity implements View.OnClickListener {
         mStateManager = StateManager.builder(this)
                 .setContent(webView)
                 .setEmptyView(R.layout.state_empty)
-                .setErrorOnClickListener(new StateListener.OnClickListener() {
+                .setErrorOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         showToast("错误状态");
                     }
                 })
-                .setEmptyOnClickListener(new StateListener.OnClickListener() {
+                .setEmptyOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         showToast("空状态");

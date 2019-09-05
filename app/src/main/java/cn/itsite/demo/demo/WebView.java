@@ -51,13 +51,13 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
         mStateManager = StateManager.builder(this)
                 .setContent(webView)
                 .setEmptyView(R.layout.state_empty)
-                .setErrorOnClickListener(new StateListener.OnClickListener() {
+                .setErrorOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         showToast("错误状态");
                     }
                 })
-                .setEmptyOnClickListener(new StateListener.OnClickListener() {
+                .setEmptyOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         showToast("空状态");

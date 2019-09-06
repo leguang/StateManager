@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,46 +62,43 @@ public class StateLayout extends FrameLayout {
     }
 
     public StateLayout setContentView(@LayoutRes int layoutId) {
-        if (layoutId == 0) {
-            return this;
+        if (layoutId != 0) {
+            setContentView(inflate(layoutId));
         }
-        return setContentView(inflate(getContext(), layoutId, null));
+        return this;
     }
 
     public StateLayout setLoadingView(@LayoutRes int layoutId) {
-        if (layoutId == 0) {
-            return this;
+        if (layoutId != 0) {
+            setLoadingView(inflate(layoutId));
         }
-        LayoutInflater factory = LayoutInflater.from(getContext());
-        View inflate = factory.inflate(layoutId, this, false);
-        return setLoadingView(inflate);
+        return this;
     }
 
     public StateLayout setEmptyView(@LayoutRes int layoutId) {
-        if (layoutId == 0) {
-            return this;
+        if (layoutId != 0) {
+            setEmptyView(inflate(layoutId));
         }
-        LayoutInflater factory = LayoutInflater.from(getContext());
-        View inflate = factory.inflate(layoutId, this, false);
-        return setEmptyView(inflate);
+        return this;
     }
 
     public StateLayout setErrorView(@LayoutRes int layoutId) {
-        if (layoutId == 0) {
-            return this;
+        if (layoutId != 0) {
+            setErrorView(inflate(layoutId));
         }
-        LayoutInflater factory = LayoutInflater.from(getContext());
-        View inflate = factory.inflate(layoutId, this, false);
-        return setErrorView(inflate);
+        return this;
     }
 
     public StateLayout setNetErrorView(@LayoutRes int layoutId) {
-        if (layoutId == 0) {
-            return null;
+        if (layoutId != 0) {
+            setNetErrorView(inflate(layoutId));
         }
+        return this;
+    }
+
+    private View inflate(@LayoutRes int layoutId) {
         LayoutInflater factory = LayoutInflater.from(getContext());
-        View inflate = factory.inflate(layoutId, this, false);
-        return setNetErrorView(inflate);
+        return factory.inflate(layoutId, this, false);
     }
 
     public StateLayout setLoadingView(@Nullable View view) {
@@ -109,7 +107,12 @@ public class StateLayout extends FrameLayout {
                 removeView(mLoadingView);
                 Log.w(TAG, "you have already set a loading view and would be instead of this new one.");
             }
-            addView(view, view.getLayoutParams());
+            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+            if (layoutParams != null) {
+                addView(view, layoutParams);
+            } else {
+                addView(view);
+            }
             mLoadingView = view;
             mLoadingView.setVisibility(GONE);
         }
@@ -122,7 +125,12 @@ public class StateLayout extends FrameLayout {
                 removeView(mEmptyView);
                 Log.w(TAG, "you have already set a empty view and would be instead of this new one.");
             }
-            addView(view, view.getLayoutParams());
+            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+            if (layoutParams != null) {
+                addView(view, layoutParams);
+            } else {
+                addView(view);
+            }
             mEmptyView = view;
             mEmptyView.setVisibility(GONE);
         }
@@ -135,7 +143,12 @@ public class StateLayout extends FrameLayout {
                 removeView(mErrorView);
                 Log.w(TAG, "you have already set a error view and would be instead of this new one.");
             }
-            addView(view, view.getLayoutParams());
+            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+            if (layoutParams != null) {
+                addView(view, layoutParams);
+            } else {
+                addView(view);
+            }
             mErrorView = view;
             mErrorView.setVisibility(GONE);
         }
@@ -148,7 +161,12 @@ public class StateLayout extends FrameLayout {
                 removeView(mNetErrorView);
                 Log.w(TAG, "you have already set a net error view and would be instead of this new one.");
             }
-            addView(view, view.getLayoutParams());
+            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+            if (layoutParams != null) {
+                addView(view, layoutParams);
+            } else {
+                addView(view);
+            }
             mNetErrorView = view;
             mNetErrorView.setVisibility(GONE);
         }
@@ -156,15 +174,19 @@ public class StateLayout extends FrameLayout {
     }
 
     public StateLayout setContentView(@Nullable View view) {
-        if (view == null) {
-            return this;
+        if (view != null) {
+            if (mContentView != null) {
+                removeView(mContentView);
+                Log.w(TAG, "you have already set a content view and would be instead of this new one.");
+            }
+            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+            if (layoutParams != null) {
+                addView(view, layoutParams);
+            } else {
+                addView(view);
+            }
+            mContentView = view;
         }
-        if (mContentView != null) {
-            removeView(mContentView);
-            Log.w(TAG, "you have already set a content view and would be instead of this new one.");
-        }
-        addView(view);
-        mContentView = view;
         return this;
     }
 
